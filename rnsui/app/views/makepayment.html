@@ -1,0 +1,50 @@
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h2>Make Payment Form</h2>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<h3>Consumer Name&nbsp;:&nbsp;{{consumer.fname+' '+consumer.lname}}</h3>
+						<h4>Box No.&nbsp;:&nbsp;{{consumer.boxno}}</h4>
+					</div>
+					<div class="col-lg-12">
+						<form name="makePaymentForm" ng-submit="submit(makePaymentForm.$valid)">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="col-lg-6">
+										<div class="form-group" ng-class="{'has-error':makePaymentForm.dop.$invalid && submitted}">
+											<label>Payment Date</label>
+											<p class="input-group">
+											<input type="text" name="dop" class="form-control" uib-datepicker-popup="dd-MM-yyyy" is-open="datePicker.opened" ng-model="payment.dop" close-text="Close" ng-click="open()" required />
+											<span class="input-group-btn">
+											<button type="button" class="btn btn-default" ng-click="open()"><i class="fa fa-calendar"></i></button>
+											</span>
+											</p>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label>Amount</label>
+											<input class="form-control" type="text" name="amount" ng-model="payment.amount">
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="col-lg-3">
+										<button class="btn btn-success form-control" type="submit" ng-click="submitted=true">GO</button>
+									</div>
+									<div class="col-lg-3 pull-right">
+										<button class="btn btn-danger form-control" type="button" ng-click="cancel()">Cancel</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

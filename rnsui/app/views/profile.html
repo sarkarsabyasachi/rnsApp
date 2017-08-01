@@ -1,0 +1,232 @@
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="col-lg-6">
+							<h4>Consumer Profile</h4>
+						</div>
+						<div class="col-lg-6">
+							<a class="btn pull-right" href="#!/main" title="Consumer List"><i class="fa fa-list fa-2x"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="panel-content">
+					<div class="col-lg-12">
+						<div class="col-lg-8">
+							<ul >
+								<li style="display: block;"><h3>Name&emsp;:&emsp;{{consumer.fname|uppercase}} {{consumer.lname|uppercase}}</h3></li>
+								<li style="display: block;" ><h4>Box No.&emsp;:&emsp;{{consumer.boxno}}</h4></li>
+								<li style="display: block;"><h5>Address&emsp;:&emsp;{{consumer.address|uppercase}}</h5></li>
+								<li style="display: block;"><h5>Date of connection&emsp;:&emsp;{{consumer.doc|date}}</h5></li>
+							</ul>
+						</div>
+						<!-- <div class="col-lg-4">
+							<a href="" ng-click="clkMakePayment()" data-toggle="modal" data-target="#payment-modal"><b>Make Payment</b></a>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12">
+	<div class="col-lg-8">
+		<h3>Payment History</h3>
+	</div>
+		<table class="table table-bordered" ng-if="paymentList">
+			<thead>
+				<th>Year</th>
+				<th>JAN</th>
+				<th>FEB</th>
+				<th>MAR</th>
+				<th>APR</th>
+				<th>MAY</th>
+				<th>JUN</th>
+				<th>JUL</th>
+				<th>AUG</th>
+				<th>SEP</th>
+				<th>OCT</th>
+				<th>NOV</th>
+				<th>DEC</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<span>{{paymentList.year}}</span>
+					</td>
+					<td><a href="" ng-click="openEditPayment(paymentList.year,paymentList.m1,1)" data-toggle="modal" data-target="#payment-modal">
+						<span ng-show="paymentList.m1">&nbsp;<i class="fa fa-inr">&nbsp;</i>{{paymentList.m1}}
+						</span>
+						<span ng-hide="paymentList.m1" class="text-danger">Due</span>
+						</a>
+					</td>
+					<td>
+						<a href="" ng-click="openEditPayment(paymentList.year,paymentList.m2,2)" data-toggle="modal" data-target="#payment-modal">
+						<span ng-show="paymentList.m2">&nbsp;<i class="fa fa-inr">&nbsp;</i>{{paymentList.m2}}
+						</span>
+						<span ng-hide="paymentList.m2" class="text-danger">Due</span>
+						</a>
+					</td>
+					<td>
+						<a href="" ng-click="openEditPayment(paymentList.year,paymentList.m3,3)" data-toggle="modal" data-target="#payment-modal">
+						<span ng-show="paymentList.m3">&nbsp;<i class="fa fa-inr">&nbsp;</i>{{paymentList.m3}}
+						</span>
+						<span ng-hide="paymentList.m3" class="text-danger">Due</span>
+						</a>
+					</td>
+					<td>
+						<a href="" ng-click="openEditPayment(paymentList.year,paymentList.m4,4)" data-toggle="modal" data-target="#payment-modal">
+						<span ng-show="paymentList.m4">&nbsp;<i class="fa fa-inr">&nbsp;</i>{{paymentList.m4}}
+						</span>
+						<span ng-hide="paymentList.m4" class="text-danger">Due</span>
+						</a>
+					</td>
+					<td>
+						<a href="" ng-click="openEditPayment(paymentList.year,paymentList.m5,5)" data-toggle="modal" data-target="#payment-modal">
+						<span ng-show="paymentList.m5">&nbsp;<i class="fa fa-inr">&nbsp;</i>{{paymentList.m5}}
+						</span>
+						<span ng-hide="paymentList.m5" class="text-danger">Due</span>
+						</a>
+					</td>
+					<td>
+						<a href="" ng-click="openEditPayment(paymentList.year,paymentList.m6,6)" data-toggle="modal" data-target="#payment-modal">
+						<span ng-show="paymentList.m6">&nbsp;<i class="fa fa-inr">&nbsp;</i>{{paymentList.m6}}
+						</span>
+						<span ng-hide="paymentList.m6" class="text-danger">Due</span>
+						</a>
+					</td>
+					<td>
+						<a href="" ng-click="openEditPayment(paymentList.year,paymentList.m7,7)" data-toggle="modal" data-target="#payment-modal">
+						<span ng-show="paymentList.m7">&nbsp;<i class="fa fa-inr">&nbsp;</i>{{paymentList.m7}}
+						</span>
+						<span ng-hide="paymentList.m7" class="text-danger">Due</span>
+						</a>
+					</td>
+					<td>
+						<a href="" ng-click="openEditPayment(paymentList.year,paymentList.m8,8)" data-toggle="modal" data-target="#payment-modal">
+						<span ng-show="paymentList.m8">&nbsp;<i class="fa fa-inr">&nbsp;</i>{{paymentList.m8}}
+						</span>
+						<span ng-hide="paymentList.m8" class="text-danger">Due</span>
+						</a>
+					</td>
+					<td>
+						<a href="" ng-click="openEditPayment(paymentList.year,paymentList.m9,9)" data-toggle="modal" data-target="#payment-modal">
+						<span ng-show="paymentList.m9">&nbsp;<i class="fa fa-inr">&nbsp;</i>{{paymentList.m9}}
+						</span>
+						<span ng-hide="paymentList.m9" class="text-danger">Due</span>
+						</a>
+					</td>
+					<td>
+						<a href="" ng-click="openEditPayment(paymentList.year,paymentList.m10,10)" data-toggle="modal" data-target="#payment-modal">
+						<span ng-show="paymentList.m10">&nbsp;<i class="fa fa-inr">&nbsp;</i>{{paymentList.m10}}
+						</span>
+						<span ng-hide="paymentList.m10" class="text-danger">Due</span>
+						</a>
+					</td>
+					<td>
+						<a href="" ng-click="openEditPayment(paymentList.year,paymentList.m11,11)" data-toggle="modal" data-target="#payment-modal">
+						<span ng-show="paymentList.m11">&nbsp;<i class="fa fa-inr">&nbsp;</i>{{paymentList.m11}}
+						</span>
+						<span ng-hide="paymentList.m11" class="text-danger">Due</span>
+						</a>
+					</td>
+					<td>
+						<a href="" ng-click="openEditPayment(paymentList.year,paymentList.m12,12)" data-toggle="modal" data-target="#payment-modal">
+						<span ng-show="paymentList.m12">&nbsp;<i class="fa fa-inr">&nbsp;</i>{{paymentList.m12}}
+						</span>
+						<span ng-hide="paymentList.m12" class="text-danger">Due</span>
+						</a>
+					</td>
+
+				</tr>
+			</tbody>
+		</table>
+		<div class="col-lg-12" ng-if="!paymentList">
+			<div class="text-danger text-center">
+				<h2>NO PAYMENT HISTORY</h2>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="payment-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><b><i class="fa fa-edit"></i>&emsp;Payment for {{consumer.fname+' '+consumer.lname}}</b></h4>
+      </div>
+      <div class="modal-body">
+      <div class="row"  ng-hide="showOKBtnFlag||showNOKBtnFlag">
+	<div class="col-lg-12">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h4>Payment Entry Form</h4>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<form name="makePaymentForm" ng-submit="submit(makePaymentForm.$valid)">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="col-lg-6">
+										<div class="form-group" ng-class="{'has-error':makePaymentForm.dop.$invalid && submitted}">
+											<label>Payment Date</label>
+											<p class="input-group">
+											<input type="text" name="dop" class="form-control" uib-datepicker-popup="dd-MM-yyyy" is-open="datePicker.opened" ng-model="payment.dop" close-text="Close" ng-click="open()" required />
+											<span class="input-group-btn">
+											<button type="button" class="btn btn-default" ng-click="open()"><i class="fa fa-calendar"></i></button>
+											</span>
+											</p>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label>Amount</label>
+											<input class="form-control" type="text" name="amount" ng-model="payment.amount">
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="col-lg-3">
+										<button class="btn btn-success form-control" type="submit" ng-click="submitted=true">Pay</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+      <div class="row" ng-show="showOKBtnFlag">
+        <div class="col-lg-12">
+          <div class="jumbotron">
+          <h3>Payment successful.</h3>
+            <button class="btn btn-success" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-show="showNOKBtnFlag">
+        <div class="col-lg-12">
+          <div class="jumbotron">
+          <h3>There is an error occurred. Please re-try or contact with administrator.</h3>
+            <button class="btn btn-warning" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="cancelEdit()" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<!-- _____________________Alert Section ______________________________-->
+
+<div class="alert alert-success alert-dismissable" ng-show="onSuccessFlag">
+	<a href="" class="close" data-dismiss="alert" aria-label="close">×</a>
+	<strong>Success!</strong> Consumer successfully added.
+</div>
+
+<div class="alert alert-danger alert-dismissable" ng-show="onErrorFlag">
+	<a href="" class="close" data-dismiss="alert" aria-label="close">×</a>
+	<strong>Error!</strong> Error occurred during adding consumer.
+</div>
+<!-- ____________________________________________________________________-->
+
+<!-- _______________________Add consumer form section ____________________-->
+
+<div class="row">
+<form name="addConsumerForm" ng-submit="addConsumer(addConsumerForm.$valid)">
+<div class="col-lg-12">
+	<div class="panel panel-info">
+		<div class="panel-heading">
+		<div class="row">
+		<div class="col-lg-12">
+			<div class="col-lg-6">
+				<h4>Add Consumer</h4>
+			</div>
+			<div class="col-lg-6">
+				<a class="btn pull-right" href="#!/main" title="Consumer List"><i class="fa fa-list fa-2x"></i></a>
+			</div>
+		</div>
+		</div>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="col-lg-6">
+						<div class="form-group" ng-class="{'has-error':addConsumerForm.fname.$invalid && submitted}">
+							<label>First Name</label>
+							<input style="text-transform:uppercase" class="form-control" type="text" ng-model="consumer.fname" name="fname" placeholder="Enter First Name" required>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group" ng-class="{'has-error':addConsumerForm.lname.$invalid && submitted}">
+							<label>Last Name</label>
+							<input style="text-transform:uppercase" class="form-control" type="text" ng-model="consumer.lname" ng-change="upperCase(consumer.lname)" name="lname" placeholder="Enter Last Name" required>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label>Box No.</label>
+							<input style="text-transform:uppercase" class="form-control" type="text" name="" placeholder="Enter Box No." ng-model="consumer.boxno" ng-change="chngBoxNo()" required>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label>Address</label>
+							<input style="text-transform:uppercase" class="form-control" type="text" name="" placeholder="Enter Address" ng-model="consumer.address" required>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class="col-lg-6">
+						<div class="form-group" ng-class="{'has-error':addConsumerForm.doc.$invalid && submitted}">
+							<label>Subscription Date</label>
+							<p class="input-group">
+							<input type="text" name="doc" class="form-control" uib-datepicker-popup="dd-MM-yyyy" is-open="datePicker.opened" ng-model="consumer.doc" close-text="Close" ng-click="open()" required />
+							<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open()"><i class="fa fa-calendar"></i></button>
+							</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer">
+			<button type="submit" ng-click="submitted=true" class="btn btn-primary">ADD</button>
+		</div>
+	</div>
+</div>
+</form>	
+</div>
+
+

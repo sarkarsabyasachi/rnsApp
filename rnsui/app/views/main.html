@@ -1,0 +1,214 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+    <div class="panel-heading">
+    <div class="row"> 
+    
+
+<!-- <div class="jumbotron">{{json}}</div> -->
+
+
+
+
+    <div class="col-lg-12">
+      <div class="col-lg-9">
+      <h4><b>Search Consumers</b></h4>
+      </div>
+      <div class="col-lg-offset-10">
+      <a href="#!/addconsumer" class="btn pull-right" style="color: white"><i class="fa fa-plus-circle fa-2x"></i></a>
+      </div>
+    </div>
+    </div>
+    </div>
+    <div class="panel-body">
+    <div class="row">
+    <div class="col-lg-12">
+    
+      <div class="form-group">
+      <label></label>
+        <input type="text" placeholder="Search by Name or Box No. or Address" class="form-control" ng-model="search">
+      </div>
+    </div>
+    </div>
+      
+    </div>
+    <div class="panel-footer"></div>
+  </div>
+  </div>
+
+<div class="col-lg-12">
+  <div class="alert alert-success alert-dismissable" ng-show="onSuccessFlag">
+    <a href="" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>Success!</strong> Consumer successfully Deleted.
+  </div>
+
+  <div class="alert alert-danger alert-dismissable" ng-show="onErrorFlag">
+    <a href="" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>Error!</strong> Error occurred during deleting consumer.
+  </div>
+</div>
+
+
+  <div class="col-lg-12">
+    <table class="table table-bordered table-hover" ng-if="consumers.length > 0">
+      <thead>
+        <th>..</th>
+        <th>Name</th>
+        <th>Box No.</th>
+        <th>Address</th>
+        <th>Date of Connection</th> 
+      </thead>
+      <tbody>
+        <tr ng-repeat="consumer in consumers | filter:search " >
+          <td><button class="btn btn-info" title="Edit" data-toggle="modal" data-target="#edit-modal" ng-click="showConsumer(consumer)"><i class="fa fa-edit"></i></button>
+          <button class="btn btn-danger" ng-click="loadModalDelete(consumer)" data-toggle="modal" data-target="#trash-modal" title="Delete"><i class="fa fa-trash"></i></button>
+          <input type="checkbox" ng-model="consumer.isChecked" ng-change="prepareListToExport(consumer)"></td>
+          <td><a href="#!/profile/{{consumer._id}}">{{consumer.fname|uppercase}}&nbsp;{{consumer.lname|uppercase}}</a></td>
+          <td>{{consumer.boxno}}</td>
+          <td>{{consumer.address|uppercase}}</td>
+          <td>{{consumer.doc|date}}</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <div ng-if="consumers.length==0"><h3 class="text-center text-danger">NO DATA FOUND</h3>
+    </div>
+  </div>
+  <div class="col-lg-12" ng-if="consumers.length>0">
+    <button type="button" class="btn btn-primary" csv-header="getHeader()" ng-csv="getArray()" filename="customer_list.csv">Export</button>
+  </div>
+</div>
+
+
+<div id="trash-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><b>Delete {{deleteData.fname+' '+deleteData.lname}}</b></h4>
+      </div>
+      <div class="modal-body">
+      <div class="row">
+      <div class="col-lg-12">
+      <div class="col-lg-2">
+        <i class="fa fa-trash fa-5x text-danger"></i>
+      </div>
+      <div class="col-lg-10">
+        <h2 class="text-danger">Are You Sure???.</h2>
+      </div>        
+      </div>        
+      </div>
+        
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-danger" ng-click="deleteConsumer()" data-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()" data-dismiss="modal">No</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+<div id="edit-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><b><i class="fa fa-edit"></i>&emsp;Edit {{editData.fname+' '+editData.lname}}</b></h4>
+      </div>
+      <div class="modal-body">
+      <div class="row" ng-hide="showOKBtnFlag||showNOKBtnFlag">
+      <form name="updateConsumerForm" ng-submit="updateConsumer(updateConsumerForm.$valid)">
+<div class="col-lg-12">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4>Update Consumer</h4>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="col-lg-6">
+            <div class="form-group" ng-class="{'has-error':updateConsumerForm.fname.$invalid && submitted}">
+              <label>First Name</label>
+              <input class="form-control" type="text" ng-model="consumer.fname" name="fname" placeholder="Enter First Name" required>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group" ng-class="{'has-error':updateConsumerForm.lname.$invalid && submitted}">
+              <label>Last Name</label>
+              <input class="form-control" type="text" ng-model="consumer.lname" name="lname" placeholder="Enter Last Name" required>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Box No.</label>
+              <input class="form-control" type="text" name="" placeholder="Enter Box No." ng-model="consumer.boxno" required>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Address</label>
+              <input class="form-control" type="text" name="" placeholder="Enter address" ng-model="consumer.address" required>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Subscription Date</label>
+              <p class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" is-open="datePicker.opened" ng-model="consumer.doc" close-text="Close" ng-click="open()" />
+              <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open()"><i class="fa fa-calendar"></i></button>
+              </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <button type="submit" ng-click="submitted=true" class="btn btn-primary">Update</button>
+    </div>
+  </div>
+</div>
+</form>         
+      </div>
+      <div class="row" ng-show="showOKBtnFlag">
+        <div class="col-lg-12">
+          <div class="jumbotron">
+          <h3>Consumer has been successfully updated.</h3>
+            <button class="btn btn-success" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-show="showNOKBtnFlag">
+        <div class="col-lg-12">
+          <div class="jumbotron">
+          <h3>There is an error occurred. Please re-try or contact with administrator.</h3>
+            <button class="btn btn-warning" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="cancelEdit()" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
