@@ -3,6 +3,30 @@ var router = express.Router();
 var con = require('../config/connection');
 var ObjectId = require('mongodb').ObjectId;
 
+router.post('/create',function(req,res){
+	var obj=req.body;
+	console.log('payment insert object......');
+	console.log(obj);
+	var id=obj._id;
+	var year= new Date(obj.doc).getFullYear();
+	con.connect(function(err,db){
+		if(err){
+			res.json({error:'db is not fetched'});
+		}
+		else{
+			db.collection('payment').insertOne({_id:{id:id,year:year}},function(err,result){
+				if(err){
+					res.json({error:'err while creating doc'});
+				}
+				else{
+					res.json({message:'payement a/c for '+obj._id+' of the year '+obj.year+' has been created successfully'});
+				}
+			});
+		}
+	});
+});
+
+
 router.post('/showPaymentForYear',function(req,res){
 	var obj=req.body;
 	console.log("recieving json");
@@ -26,29 +50,7 @@ router.post('/showPaymentForYear',function(req,res){
 	});
 });
 
-router.post('/create',function(req,res){
-	var obj=req.body;
-	console.log(obj);
-	console.log("requesting object");
-	console.log(req);
-	var updateData={_id:ObjectId(obj._id)};
-	con.connect(function(err,db){
-		if(err){
-			res.json({error:"DB ERROR"});
-		}
-		else{
-			db.collection('payment').insertOne(updateData,function(err,result){
-				if(err){
-					res.json({error:'DBERR'});
-				}
-				else{
-					res.json({message:"payment account for "+obj._id+' has been successfully created'})
-				}
-			});
-		}
-		db.close();
-	});
-});
+
 
 router.post('/update',function(req,res){
 	var obj=Object.assign({},req.body);

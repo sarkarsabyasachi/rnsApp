@@ -29,7 +29,7 @@ router.get("/showallconsumers",function(req,res){
 
 router.post('/create', function(req, res){
   var obj= req.body;
-  obj.payments={year:new Date(obj.doc).getFullYear().toString()};
+  //obj.payments={year:new Date(obj.doc).getFullYear().toString()};
   console.log(obj);
   con.connect(function(err, db){
     if(err){
@@ -131,108 +131,6 @@ router.post("/updateConsumer",function(req,res){
 	});
 });
 
-router.post('/updatePayment',function(req,res){
-	var obj=Object.assign({},req.body);
-	var id=obj._id;
-	delete obj._id;
-	var updateData={};
-	console.log("UPDATE DATA########################");
-	console.log(obj);
-	con.connect(function(err,db){
-		if(err){
-			res.json({error:"DB ERR"});
-		}
-		else{
-			var year = new Date(obj.dop).getFullYear();
-			var month = new Date(obj.dop).getMonth();
-			console.log("YEAR");
-			console.log(year);
-			console.log("MONTH");
-			console.log(month);
-			switch(month){
-					case 0 : 
-					updateData.year=year.toString();
-					updateData.payments[0].m1=obj.amount;
-					break;
-					case 1 : 
-					updateData.year=year.toString();
-					updateData.payments[1].m2=obj.amount;
-					break;
-					case 2 : 
-					updateData.year=year.toString();
-					updateData.payments[2].m3=obj.amount;
-					break;
-					case 3 : 
-					updateData.year=year.toString();
-					updateData.payments[3].m4=obj.amount;
-					break;
-					case 4 : 
-					updateData.year=year.toString();
-					updateData.payments[4].m5=obj.amount;
-					break;
-					case 5 : 
-					updateData.year=year.toString();
-					updateData.payments[5].m6=obj.amount;
-					break;
-					case 6 : 
-					updateData.year=year.toString();
-					updateData.payments[6].m7=obj.amount;
-					break;
-					case 7 : 
-					updateData.year=year.toString();
-					updateData.payments[7].m8=obj.amount;
-					break;
-					case 8 : 
-					updateData.year=year.toString();
-					updateData.payments[8].m9=obj.amount;
-					break;
-					case 9 : 
-					updateData.year=year.toString();
-					updateData.payments[9].m10=obj.amount;
-					break;
-					case 10 : 
-					updateData.year=year.toString();
-					updateData.payments[10].m11=obj.amount;
-					break;
-					case 11 : 
-					updateData.year=year.toString();
-					updateData.payments[11].m12=obj.amount;
-					break;
-			}
-			console.log("UPDATE DATA payments########################");
-			console.log(updateData);
-			db.collection('consumer').updateOne({'_id':ObjectId(id)},{$set:{payments:updateData}},function(err,doc){
-				if(err){
-					res.json({error:"error during update"});
-				}
-				else{
-					res.json({message:"successfully done"});
-				}
-			});
-		}
-	});
 
-	router.post('/showPaymentForYear',function(req,res){
-		var obj=req.body;
-		console.log("recieving json");
-		console.log(obj)
-		con.connect(function(err,db){
-			if(err){
-				res.json({error:"DB ERROR"});
-			}
-			else{
-				db.collection('consumer').findOne({$and:[{'_id':ObjectId(obj._id)},{'payments.year':obj.year.toString()}]},function(err,doc){
-					if(err){
-						res.json({error:'error occurred during reading document'});
-					}
-					else{
-						res.json(doc);
-					}
-				});
-			}
-			db.close();
-		});
-	});
-});
 
 module.exports = router;
