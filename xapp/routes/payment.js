@@ -14,11 +14,12 @@ router.post('/create',function(req,res){
 			res.json({error:'db is not fetched'});
 		}
 		else{
-			db.collection('payment').insertOne({_id:{id:id,year:year}},function(err,result){
+			db.collection('payment').insertOne({consumerid:id,year:year,payments:[]},function(err,result){
 				if(err){
 					res.json({error:'err while creating doc'});
 				}
 				else{
+					test();
 					res.json({message:'payement a/c for '+obj._id+' of the year '+obj.year+' has been created successfully'});
 				}
 			});
@@ -26,6 +27,10 @@ router.post('/create',function(req,res){
 	});
 });
 
+
+function test(){
+ console.log('hey i am a test function');
+};
 
 router.post('/showPaymentForYear',function(req,res){
 	var obj=req.body;
@@ -55,55 +60,17 @@ router.post('/showPaymentForYear',function(req,res){
 router.post('/update',function(req,res){
 	var obj=Object.assign({},req.body);
 	var id=req.body._id;
-	delete obj._id;
+	var year=new Date(obj.dop).getFullYear();
+	var month=new Date(obj.dop).getMonth();
+	//delete obj._id;
+	console.log(obj);
 	con.connect(function(err,db){
 		if(err){
 			res.json({error:"Db error"});
 		}
 		else{
-			var year=new Date(obj.dop).getFullYear();
-			var month=new Date(obj.dop).getMonth();
-			console.log("year : "+year);
-			console.log("month : "+month);
-			switch(month){
-					case 0 : 
-					updateData={year:year.toString(),m1:obj.amount};
-					break;
-					case 1 : 
-					updateData={year:year.toString(),m2:obj.amount};
-					break;
-					case 2 : 
-					updateData={year:year.toString(),m3:obj.amount};
-					break;
-					case 3 : 
-					updateData={year:year.toString(),m4:obj.amount};
-					break;
-					case 4 : 
-					updateData={year:year.toString(),m5:obj.amount};
-					break;
-					case 5 : 
-					updateData={year:year.toString(),m6:obj.amount};
-					break;
-					case 6 : 
-					updateData={year:year.toString(),m7:obj.amount};
-					break;
-					case 7 : 
-					updateData={year:year.toString(),m8:obj.amount};
-					break;
-					case 8 : 
-					updateData={year:year.toString(),m9:obj.amount};
-					break;
-					case 9 : 
-					updateData={year:year.toString(),m10:obj.amount};
-					break;
-					case 10 : 
-					updateData={year:year.toString(),m11:obj.amount};
-					break;
-					case 11 : 
-					updateData={year:year.toString(),m12:obj.amount};
-					break;
-			}
-			db.collection('payment').updateOne({_id:ObjectId(id)},{$set:updateData},function(err,result){
+			
+			db.collection('payment').updateOne({"_id.id":id,"_id.year":year,"payments.$":month},{$addToSet:{payments:{'month':month,'amount':obj.amount,'dop':obj.dop}}},function(err,result){
 				if(err){
 					res.json({message:"update error"});
 				}

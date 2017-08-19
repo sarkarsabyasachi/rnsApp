@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var con = require("../config/connection");
 var ObjectId = require("mongodb").ObjectId;
+var payment =require('./payment');
 
 // router.get("/consumers",function(req,res){
 // 	res.json({consumer:[{fname:"Rabindranath",lname:"Sarkar",address:"sarkar para"}]});
@@ -46,7 +47,20 @@ router.post('/create', function(req, res){
         }
         else{
           //console.log(result);
+          console.log('before responding');
+          console.log(obj);
+          var year=new Date(obj.doc).getFullYear()
           res.status(200).json(obj);
+          db.collection('payment').insertOne({'consumerid':obj._id,'year':year,collection:[]},function(err,result){
+          	if(err){
+          		console.log('err occurred');
+          	}
+          	else{
+          		console.log('successfully created payment');
+          	}
+          });
+          
+
 
         }
         //Close the connection
@@ -130,6 +144,7 @@ router.post("/updateConsumer",function(req,res){
 		db.close();
 	});
 });
+
 
 
 

@@ -72,70 +72,70 @@ angular.module('rnsuiApp')
 
     };
 
-    $scope.openEditPayment=function(year,amt,month){
-    	console.log(amt);
-    	$scope.showOKBtnFlag=false;
-    	$scope.showNOKBtnFlag=false;
-    	if(!year){
-    		event.stopPropagation();
-    	}
-    	switch(month){
-    		case 1:
-    		$scope.payment={dop:new Date("1/1/"+ new Date().getFullYear().toString()),
-    						amount:amt};
-    		break;
-    		case 2:
-    		$scope.payment={dop:new Date("2/1/"+ new Date().getFullYear().toString()),
-    						amount:amt};
-    		break;
-    		case 3:
-    		$scope.payment={dop:new Date("3/1/"+ new Date().getFullYear().toString()),
-    						amount:amt};
-    		break;
-    		case 4:
-    		$scope.payment={dop:new Date("4/1/"+ new Date().getFullYear().toString()),
-    						amount:amt};
-    		break;
-    		case 5:
-    		$scope.payment={dop:new Date("5/1/"+ new Date().getFullYear().toString()),
-    						amount:amt};
-    		break;
-    		case 6:
-    		$scope.payment={dop:new Date("6/1/"+ new Date().getFullYear().toString()),
-    						amount:amt};
-    		break;
-    		case 7:
-    		$scope.payment={dop:new Date("7/1/"+ new Date().getFullYear().toString()),
-    						amount:amt};
-    		break;
-    		case 8:
-    		$scope.payment={dop:new Date("8/1/"+ new Date().getFullYear().toString()),
-    						amount:amt};
-    		break;
-    		case 9:
-    		$scope.payment={dop:new Date("9/1/"+ new Date().getFullYear().toString()),
-    						amount:amt};
-    		break;
-    		case 10:
-    		$scope.payment={dop:new Date("10/1/"+ new Date().getFullYear().toString()),
-    						amount:amt};
-    		break;
-    		case 11:
-    		$scope.payment={dop:new Date("11/1/"+ new Date().getFullYear().toString()),
-    						amount:amt};
-    		break;
-    		case 12:
-    		$scope.payment={dop:new Date("12/1/"+ new Date().getFullYear().toString()),
-    						amount:amt};
-    		break;
-    	}
-    };
+    // $scope.openEditPayment=function(year,amt,month){
+    // 	console.log(amt);
+    // 	$scope.showOKBtnFlag=false;
+    // 	$scope.showNOKBtnFlag=false;
+    // 	if(!year){
+    // 		event.stopPropagation();
+    // 	}
+    // 	switch(month){
+    // 		case 1:
+    // 		$scope.payment={dop:new Date("1/1/"+ new Date().getFullYear().toString()),
+    // 						amount:amt};
+    // 		break;
+    // 		case 2:
+    // 		$scope.payment={dop:new Date("2/1/"+ new Date().getFullYear().toString()),
+    // 						amount:amt};
+    // 		break;
+    // 		case 3:
+    // 		$scope.payment={dop:new Date("3/1/"+ new Date().getFullYear().toString()),
+    // 						amount:amt};
+    // 		break;
+    // 		case 4:
+    // 		$scope.payment={dop:new Date("4/1/"+ new Date().getFullYear().toString()),
+    // 						amount:amt};
+    // 		break;
+    // 		case 5:
+    // 		$scope.payment={dop:new Date("5/1/"+ new Date().getFullYear().toString()),
+    // 						amount:amt};
+    // 		break;
+    // 		case 6:
+    // 		$scope.payment={dop:new Date("6/1/"+ new Date().getFullYear().toString()),
+    // 						amount:amt};
+    // 		break;
+    // 		case 7:
+    // 		$scope.payment={dop:new Date("7/1/"+ new Date().getFullYear().toString()),
+    // 						amount:amt};
+    // 		break;
+    // 		case 8:
+    // 		$scope.payment={dop:new Date("8/1/"+ new Date().getFullYear().toString()),
+    // 						amount:amt};
+    // 		break;
+    // 		case 9:
+    // 		$scope.payment={dop:new Date("9/1/"+ new Date().getFullYear().toString()),
+    // 						amount:amt};
+    // 		break;
+    // 		case 10:
+    // 		$scope.payment={dop:new Date("10/1/"+ new Date().getFullYear().toString()),
+    // 						amount:amt};
+    // 		break;
+    // 		case 11:
+    // 		$scope.payment={dop:new Date("11/1/"+ new Date().getFullYear().toString()),
+    // 						amount:amt};
+    // 		break;
+    // 		case 12:
+    // 		$scope.payment={dop:new Date("12/1/"+ new Date().getFullYear().toString()),
+    // 						amount:amt};
+    // 		break;
+    // 	}
+    // };
 
     $scope.submit=function(isValid){
     	if(isValid){
     		$http({
 	    		method:'POST',
-	    		url:$scope.apiUrl+'/consumer/updatePayment',
+	    		url:$scope.apiUrl+'/payment/update',
 	    		data: {	_id:$scope.consumer._id,
 	    				dop:$scope.payment.dop,
 	    				amount:$scope.payment.amount}

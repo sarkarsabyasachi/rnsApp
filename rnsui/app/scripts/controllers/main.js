@@ -143,17 +143,40 @@ angular.module('rnsuiApp')
 	    	});
     	}
     };
-
-
-
-
+    
     $scope.showAllConsumers();
   
 
 
 
 
+
   });
+
+///////////////////////CONTROLLER ENDS HERE/////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // headers: {
